@@ -1,7 +1,13 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: kexin
+ * Date: 2018/8/14
+ * Time: 15:27
+ */
 
 
-class Process
+class Swoole_Process
 {
     private $process_list = [];
     private $process_use = [];
@@ -104,8 +110,9 @@ class Process
     private function signal ()
     {
         swoole_process::singal(SIGCHLD, function ($sig) {
-            while ($ret = swoole_process:wait(false)) {
-                echo "PID=[$ret['pid']] out \n";
+            while ($ret = swoole_process . ':' . wait(false)) {
+                echo "PID= out \n";
+                print_r([$ret['pid']]);
             }
         });
     }
