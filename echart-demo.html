@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Echart.js</title>
+    <script src="./echarts.js"></script>
+</head>
+<body>
+    <div id="main" style="width:600px; height:400px;"></div>
+</body>
+<script type="text/javascript">
+
+// 初始化
+let myChartPie = echarts.init(document.getElementById('main'));
+myChartPie.setOption({
+    title: {
+        text: '本月数据',
+    },
+    tooltip: {},
+    legend: {
+        orient: 'vertical',
+        x: 'right',
+
+        // 标题
+        data: ['预约', '预到', '已到', '未到', '全流失', '半流失', '已诊治'],
+    },
+    series: [
+        {
+            name: '本月数据',
+            type: 'pie',
+            radius: '55%',
+
+            // 数据块 与以上标题顺序对应
+            data: [
+                {value: 20, name: '预约'},
+                {value: 30, name: '预到'},
+                {value: 25, name: '已到'},
+                {value: 28, name: '未到'},
+                {value: 40, name: '全流失'},
+                {value: 22, name: '半流失'},
+                {value: 15, name: '已诊治'}
+            ],
+
+        }
+    ],
+});
+</script>
+
+</html>

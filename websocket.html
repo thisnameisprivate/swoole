@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>this is websocket</title>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            /*
+                webscoket 的四种状态 [webscoket.readyState]
+                connecting 0正在连接
+                opne       1连接成功
+                closing    2正在关闭
+                closed     3连接关闭
+                实例:
+                switch (WebScoket.readyState)
+                {
+                    case WebSocket.CONNECTING:
+                        // do something.
+                        break;
+                    case WebSocket.OPEN:
+                        break;
+                    case WebSooket.CLOSEING:
+                        break;
+                    case WebSocket.CLOSED:
+                        break;
+                }
+            */
+            var ws = new WebSocket('wss://echo.websocket.org');
+            ws.onopen = function (evt) {
+                console.log("connection open...");
+                ws.send("hello, WebScoket..");
+                console.log("onopen_evt: " + evt);
+            }
+            ws.onmessage = function (evt) {
+                console.log("Received Message: " + evt.data);
+                ws.close();
+                console.log("onmessage_evt :" + evt);
+            }
+            ws.close = function (evt) {
+                console.log("connection closed");
+                console.log("close_evt: " + evt);
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

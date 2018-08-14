@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+    <style>
+
+    * {list-style:none;}
+    .bgcolor{background-color:#ccc; height:200px; width:300px; border:1px solid #ccc; border-radius:10px;}
+
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            var inputs = document.getElementsByTagName('input');
+            var ul = document.getElementsByTagName('ul')[0];
+            var time = document.getElementsByTagName('div')[0];
+            var newli = document.createElement("li");
+
+            function xhr () {
+                if (inputs[0].value == '')  return false;
+                var Request = new XMLHttpRequest();
+                Request.open('GET', './insert.php?method=' + inputs[0].value);
+                Request.send();
+                Request.onreadystatechange = function () {
+                    if (Request.readyState == 4 && Request.status) {
+                        if (Request.responseText != '') {
+                            newli.innerText = showtime() + "发送消息: " + Request.responseText;
+                            ul.appendChild(newli);
+                        }
+                    }
+                }
+
+            }
+
+            function showmessage () {
+                var Request = new XMLHttpRequest();
+                Request.open('GET', './check.php?method=' + 1);
+                Request.send();
+                Request.onreadystatechange = function () {
+                    if (Request.readyState == 4 && Request.status) {
+                        ul.innerHTML = Request.responseText;
+                    }
+                }
+            }
+
+            inputs[1].onclick = function () {
+                xhr();
+            }
+
+            function showtime ()
+            {
+                time = new Date();
+                year = time.getFullYear();
+                month = time.getMonth() + 1;
+                date = time.getDate();
+                return year + '/' + month + '/' + date + ' ' + time.toLocaleTimeString();
+            }
+            setInterval(function () {
+                showmessage();
+            }, 3000)
+
+            setInterval(function () {
+                time.innerHTML = showtime();
+            } , 1000);
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <ul>
+        <li>loading old message data ...</li>
+    </ul>
+        <input type="text" name="message">
+        <input type="submit" value="发送">
+</body>
+</html>
