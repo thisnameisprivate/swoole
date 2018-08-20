@@ -36,5 +36,4 @@ do {
     }
 } while (true);
 
-
-soket_close($sock);
+socket_close($sock);
