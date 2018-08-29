@@ -11,3 +11,22 @@ $myfile = fopen("IndexController.class.php", "w") or die("Unable to open file!")
 fwrite($myfile, $phpCode);
 // close header resource link
 fclose($myfile);
+
+class Something {
+    private static $instance = null;
+    private function __construct()
+    {
+
+    }
+    public static function instance ()
+    {
+        if (! self::$instance == null) {
+            return self::$instance = new Something;
+        } else {
+            return self::$instance;
+        }
+    }
+}
+
+$something = Something::instance();
+var_dump($something);
