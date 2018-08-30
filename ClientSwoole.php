@@ -17,7 +17,6 @@ $server->on('Request', function ($request, $response) {
     $redis->connect('localhost', 6379);
     $redis->setDefer();
     $redis->get('key');
-
     $mysql = new Swoole\Coroutine\MySQL();
     $mysql->connect([
         'host' => 'localhost',
@@ -30,7 +29,7 @@ $server->on('Request', function ($request, $response) {
     $mysql->query('select sleep(1)');
 
 
-    $httpclient = new Swoole\Coroutine\Http\Client('0.0.0.0', 9599);
+    $httpclient = new Swolle\Coroutine\Http\Client('0.0.0.0', 9599);
     $httpclient->setHeaders(['Host' => 'api.mp.qq.com']);
     $httpclient->set(['timeout' => 1]);
     $httpclient->setDefer();
