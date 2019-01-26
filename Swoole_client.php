@@ -2,7 +2,7 @@
 
 $client = [];
 
-
+ 
 for ($i = 0; $i < 20; $i ++) {
     $client = new swoole_client(SWOOLE_SOCK_TCP, SWOOLE_);
     $res = $client->connect('127.0.0.1', 9501, 0.5, 0);
